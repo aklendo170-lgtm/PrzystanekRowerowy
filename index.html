@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Przystanek Rowerowy | Serwis & Wypożyczalnia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600&display=swap"
-        rel="stylesheet">
+    <title>Przystanek Rowerowy | Serwis & Wypożyczalnia Kraków</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #ff8c00;
             --dark: #1a1a1a;
             --light: #f4f4f4;
+            --white: #ffffff;
         }
 
         * {
@@ -27,13 +27,13 @@
             line-height: 1.6;
         }
 
-        /* Nav */
+        /* Nawigacja */
         nav {
             padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #fff;
+            background: var(--white);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -50,9 +50,9 @@
             color: var(--primary);
         }
 
-        /* Hero */
+        /* Sekcja Hero */
         .hero {
-            height: 70vh;
+            height: 75vh;
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -67,88 +67,106 @@
 
         .hero h1 {
             font-family: 'Montserrat';
-            font-size: 3.2rem;
-            margin-bottom: 10px;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 15px;
         }
 
         .hero p {
             font-size: 1.1rem;
-            margin-bottom: 25px;
-            max-width: 600px;
+            margin-bottom: 30px;
+            max-width: 650px;
+            opacity: 0.9;
         }
 
-        /* Przycisk */
+        /* Przyciski */
         .btn {
             background: var(--primary);
             color: white;
-            padding: 15px 30px;
+            padding: 16px 35px;
             text-decoration: none;
             font-weight: 600;
             border-radius: 8px;
-            transition: 0.3s;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             border: none;
+            font-family: 'Inter';
+            display: inline-block;
         }
 
         .btn:hover {
             background: #e67e00;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.3);
         }
 
-        /* Usługi */
+        /* Sekcja Usług */
         .services {
-            padding: 60px 10%;
+            padding: 80px 10%;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
         .card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
         }
 
         .card h3 {
             color: var(--primary);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-family: 'Montserrat';
+            font-size: 1.5rem;
         }
 
-        /* POPUP MODAL */
+        /* MODAL (POPUP) */
         .modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none; /* Domyślnie ukryty */
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
-            background: white;
+            background: var(--white);
             padding: 40px;
-            border-radius: 15px;
+            border-radius: 20px;
             width: 90%;
             max-width: 500px;
             position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .close {
             position: absolute;
-            top: 15px;
+            top: 20px;
             right: 20px;
-            font-size: 25px;
+            font-size: 28px;
             cursor: pointer;
+            line-height: 1;
         }
 
-        /* Formularz stylizacja */
+        /* Formularz */
         form {
             display: flex;
             flex-direction: column;
@@ -156,28 +174,38 @@
             margin-top: 20px;
         }
 
-        input,
-        select,
-        textarea {
+        input, select, textarea {
             padding: 12px;
             border: 1px solid #ddd;
-            border-radius: 6px;
+            border-radius: 8px;
             font-family: 'Inter';
             font-size: 1rem;
+            width: 100%;
         }
 
         label {
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: -10px;
         }
 
+        #form-status {
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        /* Stopka */
         footer {
-            padding: 30px;
+            padding: 50px 10%;
             background: var(--dark);
             color: white;
             text-align: center;
-            font-size: 0.9rem;
         }
+
+        footer p { opacity: 0.7; font-size: 0.9rem; }
     </style>
 </head>
 
@@ -185,27 +213,27 @@
 
     <nav>
         <div class="logo">PRZYSTANEK <span>ROWEROWY</span></div>
-        <button class="btn" onclick="toggleModal()" style="padding: 10px 20px; font-size: 0.8rem;">UMÓW SERWIS</button>
+        <button class="btn" onclick="toggleModal()" style="padding: 10px 20px; font-size: 0.85rem;">UMÓW SERWIS</button>
     </nav>
 
     <header class="hero">
-        <h1>Rower gotowy na sezon.</h1>
-        <p>Najlepszy serwis rzemieślniczy w Krakowie. Krótkie terminy i fachowa obsługa na Al. Pokoju 32A.</p>
-        <button class="btn" onclick="toggleModal()">ZAREZERWUJ SERWIS</button>
+        <h1>Rower gotowy na przygodę.</h1>
+        <p>Fachowy serwis rzemieślniczy i wypożyczalnia w samym sercu Krakowa. Sprawdzimy, naprawimy i przygotujemy Twój sprzęt do trasy.</p>
+        <button class="btn" onclick="toggleModal()">ZAREZERWUJ TERMIN</button>
     </header>
 
     <section class="services">
         <div class="card">
             <h3>🔧 Serwis</h3>
-            <p>Pełna diagnostyka i naprawa w 24-48h.</p>
+            <p>Od regulacji przerzutek po zaawansowany serwis amortyzatorów. Szybko i konkretnie.</p>
         </div>
         <div class="card">
             <h3>🚲 Wynajem</h3>
-            <p>Rowery miejskie i trekkingowe na każdą trasę.</p>
+            <p>Rowery miejskie i wyprawowe. Idealne na weekendowy wypad nad Wisłę.</p>
         </div>
         <div class="card">
             <h3>✨ Renowacja</h3>
-            <p>Przywracamy życie klasykom i rowerom retro.</p>
+            <p>Kochamy klasyki. Przywrócimy blask Twojej ulubionej szosie z dawnych lat.</p>
         </div>
     </section>
 
@@ -213,60 +241,102 @@
         <div class="modal-content">
             <span class="close" onclick="toggleModal()">&times;</span>
             <h2 style="font-family: Montserrat;">Umów wizytę</h2>
-            <p style="font-size: 0.9rem; color: #666;">Zostaw dane, oddzwonimy z potwierdzeniem godziny.</p>
+            <p style="color: #666; font-size: 0.9rem;">Wypełnij krótki formularz, oddzwonimy z potwierdzeniem.</p>
 
-            <form action="https://formspree.io/f/mojnjdld" method="POST">
-                <input type="hidden" name="_next" value="https://aklendo170-lgtm.github.io/PrzystanekRowerowy/danke.html">
+            <form id="contact-form" action="https://formspree.io/f/mojnjdld" method="POST">
                 <label>Imię i Nazwisko</label>
                 <input type="text" name="name" placeholder="Jan Kowalski" required>
 
-                <label>Numer telefonu</label>
+                <label>Telefon</label>
                 <input type="tel" name="phone" placeholder="123 456 789" required>
 
-                <label>Co serwisujemy?</label>
+                <label>Rodzaj usługi</label>
                 <select name="service">
-                    <option>Przegląd ogólny</option>
-                    <option>Naprawa napędu</option>
-                    <option>Serwis hamulców</option>
-                    <option>Inna sprawa</option>
+                    <option value="Przegląd">Przegląd ogólny</option>
+                    <option value="Naprawa">Naprawa usterki</option>
+                    <option value="Wypożyczenie">Wypożyczenie roweru</option>
+                    <option value="Inne">Inna sprawa</option>
                 </select>
 
                 <label>Preferowana data</label>
                 <input type="date" name="date" required>
 
-                <button type="submit" class="btn">WYŚLIJ ZGŁOSZENIE</button>
+                <button type="submit" id="submit-btn" class="btn">WYŚLIJ ZGŁOSZENIE</button>
+                <p id="form-status"></p>
             </form>
         </div>
     </div>
 
     <footer>
-        <p>Przystanek Rowerowy Kraków | Aleja Pokoju 32A</p>
+        <h3 style="margin-bottom: 10px; font-family: Montserrat;">Przystanek Rowerowy Kraków</h3>
+        <p>Aleja Pokoju 32A, 31-564 Kraków</p>
+        <p style="margin-top: 10px;">Pon - Pt: 10:00 - 18:00 | Sob: 10:00 - 14:00</p>
     </footer>
 
     <script>
-        // Poprawiona funkcja toggle - teraz sprawdza realny stan wyświetlania
+        // Funkcja otwierania/zamykania okna
         function toggleModal() {
             const modal = document.getElementById('bookingModal');
-            const displaySetting = window.getComputedStyle(modal).display;
+            const currentDisplay = window.getComputedStyle(modal).display;
             
-            if (displaySetting === 'none') {
+            if (currentDisplay === 'none') {
                 modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden'; // Blokada przewijania tła
+                document.body.style.overflow = 'hidden';
             } else {
                 modal.style.display = 'none';
-                document.body.style.overflow = 'auto'; // Przywrócenie przewijania
+                document.body.style.overflow = 'auto';
             }
         }
 
-        // Dodatkowo: zamknięcie po kliknięciu poza okno formularza
+        // Zamykanie przy kliknięciu w ciemne tło
         window.onclick = function(event) {
             const modal = document.getElementById('bookingModal');
-            if (event.target == modal) {
-                toggleModal();
-            }
+            if (event.target == modal) toggleModal();
         }
+
+        // OBSŁUGA WYSYŁKI BEZ PRZEKIEROWANIA DO FORMSPREE
+        const form = document.getElementById("contact-form");
+        
+        async function handleSubmit(event) {
+            event.preventDefault();
+            const status = document.getElementById("form-status");
+            const button = document.getElementById("submit-btn");
+            const data = new FormData(event.target);
+            
+            button.disabled = true;
+            status.innerHTML = "Wysyłanie...";
+            status.style.color = "var(--primary)";
+
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // SUKCES: Przekierowanie na Twoją stronę podziękowania
+                    window.location.href = "danke.html";
+                } else {
+                    response.json().then(data => {
+                        status.style.color = "red";
+                        if (Object.hasOwn(data, 'errors')) {
+                            status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            status.innerHTML = "Ups! Coś poszło nie tak.";
+                        }
+                    })
+                }
+            }).catch(error => {
+                status.style.color = "red";
+                status.innerHTML = "Błąd połączenia z serwerem.";
+            }).finally(() => {
+                button.disabled = false;
+            });
+        }
+        
+        form.addEventListener("submit", handleSubmit);
     </script>
 
 </body>
-
 </html>
