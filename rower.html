@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przystanek Rowerowy | Serwis & Wypożyczalnia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff8c00;
+            --dark: #1a1a1a;
+            --light: #f4f4f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Nav */
+        nav {
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-family: 'Montserrat';
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 10%;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat';
+            font-size: 3.2rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            max-width: 600px;
+        }
+
+        /* Przycisk */
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background: #e67e00;
+            transform: translateY(-2px);
+        }
+
+        /* Usługi */
+        .services {
+            padding: 60px 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-family: 'Montserrat';
+        }
+
+        /* POPUP MODAL */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        /* Formularz stylizacja */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Inter';
+            font-size: 1rem;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            padding: 30px;
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">PRZYSTANEK <span>ROWEROWY</span></div>
+        <button class="btn" onclick="toggleModal()" style="padding: 10px 20px; font-size: 0.8rem;">UMÓW SERWIS</button>
+    </nav>
+
+    <header class="hero">
+        <h1>Rower gotowy na sezon.</h1>
+        <p>Najlepszy serwis rzemieślniczy w Krakowie. Krótkie terminy i fachowa obsługa na Al. Pokoju 32A.</p>
+        <button class="btn" onclick="toggleModal()">ZAREZERWUJ SERWIS</button>
+    </header>
+
+    <section class="services">
+        <div class="card">
+            <h3>🔧 Serwis</h3>
+            <p>Pełna diagnostyka i naprawa w 24-48h.</p>
+        </div>
+        <div class="card">
+            <h3>🚲 Wynajem</h3>
+            <p>Rowery miejskie i trekkingowe na każdą trasę.</p>
+        </div>
+        <div class="card">
+            <h3>✨ Renowacja</h3>
+            <p>Przywracamy życie klasykom i rowerom retro.</p>
+        </div>
+    </section>
+
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleModal()">&times;</span>
+            <h2 style="font-family: Montserrat;">Umów wizytę</h2>
+            <p style="font-size: 0.9rem; color: #666;">Zostaw dane, oddzwonimy z potwierdzeniem godziny.</p>
+
+            <form action="https://formspree.io/f/mojnjdld" method="POST">
+                <label>Imię i Nazwisko</label>
+                <input type="text" name="name" placeholder="Jan Kowalski" required>
+
+                <label>Numer telefonu</label>
+                <input type="tel" name="phone" placeholder="123 456 789" required>
+
+                <label>Co serwisujemy?</label>
+                <select name="service">
+                    <option>Przegląd ogólny</option>
+                    <option>Naprawa napędu</option>
+                    <option>Serwis hamulców</option>
+                    <option>Inna sprawa</option>
+                </select>
+
+                <label>Preferowana data</label>
+                <input type="date" name="date" required>
+
+                <button type="submit" class="btn">WYŚLIJ ZGŁOSZENIE</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>Przystanek Rowerowy Kraków | Aleja Pokoju 32A</p>
+    </footer>
+
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById('bookingModal');
+            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        }
+    </script>
+
+</body>
+
+</html>
