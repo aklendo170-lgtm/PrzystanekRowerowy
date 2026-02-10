@@ -125,7 +125,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            display: none;
+            display: none; /* Domyślnie ukryty */
             justify-content: center;
             align-items: center;
             z-index: 1000;
@@ -244,13 +244,29 @@
     </footer>
 
     <script>
+        // Poprawiona funkcja toggle - teraz sprawdza realny stan wyświetlania
         function toggleModal() {
             const modal = document.getElementById('bookingModal');
-            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+            const displaySetting = window.getComputedStyle(modal).display;
+            
+            if (displaySetting === 'none') {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Blokada przewijania tła
+            } else {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Przywrócenie przewijania
+            }
+        }
+
+        // Dodatkowo: zamknięcie po kliknięciu poza okno formularza
+        window.onclick = function(event) {
+            const modal = document.getElementById('bookingModal');
+            if (event.target == modal) {
+                toggleModal();
+            }
         }
     </script>
 
 </body>
 
 </html>
-
