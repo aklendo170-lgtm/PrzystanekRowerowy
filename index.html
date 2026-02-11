@@ -1,206 +1,36 @@
-<!DOCTYPE html>
-<html lang="pl">
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3774/3774270.png" type="image/png">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<form id="contact-form" action="https://formspree.io/f/mojnjdld" method="POST">
+    <input type="text" name="name" placeholder="Twoje Imię i Nazwisko" required>
+    <input type="tel" name="phone" placeholder="Twój Numer Telefonu" required>
+    <select name="service">
+        <option value="Przegląd">Przegląd Rowerowy</option>
+        <option value="Naprawa">Naprawa usterki</option>
+        <option value="Wypożyczenie">Wypożyczenie roweru</option>
+    </select>
+    <input type="text" name="date" placeholder="Wybierz datę rezerwacji" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" required>
+    <textarea name="description" placeholder="Opis usterki / Szczegóły zgłoszenia..."></textarea>
     
-    <title>Przystanek Rowerowy Kraków | Profesjonalny Serwis i Wypożyczalnia</title>
-    <meta name="description" content="Najlepszy serwis rowerowy w Krakowie na Al. Pokoju 32A. Oferujemy szybkie naprawy, przeglądy oraz wypożyczalnię rowerów. Zarezerwuj termin online!">
-    <meta name="keywords" content="serwis rowerowy kraków, naprawa rowerów kraków, wypożyczalnia rowerów kraków, serwis rowerowy al. pokoju">
-    <link rel="canonical" href="https://aklendo170-lgtm.github.io/PrzystanekRowerowy/">
+    <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.75rem; color: #666; cursor: pointer;">
+        <input type="checkbox" required style="width: 15px; height: 15px; margin-top: 2px;">
+        <span>Wyrażam zgodę na przetwarzanie danych w celu obsługi zgłoszenia serwisowego.</span>
+    </label>
 
-    <meta property="og:title" content="Przystanek Rowerowy Kraków | Serwis & Wypożyczalnia">
-    <meta property="og:description" content="Profesjonalny serwis rzemieślniczy. Umów się na wizytę online i przygotuj rower na sezon!">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=1200&auto=format&fit=crop">
-    <meta property="og:url" content="https://aklendo170-lgtm.github.io/PrzystanekRowerowy/">
-    <meta property="og:type" content="website">
+    <button type="submit" id="submit-btn" class="btn">WYŚLIJ ZGŁOSZENIE</button>
+    <p id="form-status"></p>
+</form>
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BikeShop",
-      "name": "Przystanek Rowerowy Kraków",
-      "image": "https://images.unsplash.com/photo-1485965120184-e220f721d03e",
-      "@id": "https://aklendo170-lgtm.github.io/PrzystanekRowerowy/",
-      "url": "https://aklendo170-lgtm.github.io/PrzystanekRowerowy/",
-      "telephone": "+48123456789",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Aleja Pokoju 32A",
-        "addressLocality": "Kraków",
-        "postalCode": "31-564",
-        "addressCountry": "PL"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 50.0617,
-        "longitude": 19.9800
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday"],
-          "opens": "09:00",
-          "closes": "17:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Thursday", "Friday"],
-          "opens": "09:00",
-          "closes": "18:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Saturday",
-          "opens": "09:00",
-          "closes": "15:00"
-        }
-      ]
-    }
-    </script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #ff8c00;
-            --dark: #1a1a1a;
-            --light: #f4f4f4;
-            --white: #ffffff;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.6; }
-
-        nav { padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; background: var(--white); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); }
-        .logo { font-family: 'Montserrat'; font-weight: 900; font-size: 1.2rem; }
-        .logo span { color: var(--primary); }
-
-        .hero {
-            height: 75vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            color: white; text-align: center; padding: 0 10%;
-        }
-
-        .hero h1 { font-family: 'Montserrat'; font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 15px; }
-        .hero p { font-size: 1.1rem; margin-bottom: 30px; max-width: 650px; opacity: 0.9; }
-
-        .btn {
-            background: var(--primary); color: white; padding: 16px 35px; text-decoration: none; font-weight: 600; border-radius: 8px; transition: 0.3s; cursor: pointer; border: none; font-family: 'Inter'; display: inline-block;
-        }
-        .btn:hover { background: #e67e00; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 140, 0, 0.3); }
-
-        .services { padding: 80px 10%; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card { background: var(--white); padding: 40px; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); }
-        .card h3 { color: var(--primary); margin-bottom: 15px; font-family: 'Montserrat'; }
-
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); }
-        .modal-content { background: var(--white); padding: 40px; border-radius: 20px; width: 90%; max-width: 500px; position: relative; max-height: 90vh; overflow-y: auto; }
-        .close { position: absolute; top: 20px; right: 20px; font-size: 28px; cursor: pointer; }
-
-        form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        input, select, textarea { padding: 12px; border: 1px solid #ddd; border-radius: 8px; width: 100%; font-family: 'Inter'; }
-        textarea { resize: vertical; min-height: 80px; }
-        #form-status { text-align: center; margin-top: 10px; font-weight: 600; }
-
-        footer { padding: 50px 10%; background: var(--dark); color: white; text-align: center; }
-    </style>
-</head>
-
-<body>
-
-    <nav>
-        <div class="logo">PRZYSTANEK <span>ROWEROWY</span></div>
-        <button class="btn" onclick="toggleModal()" style="padding: 10px 20px; font-size: 0.85rem;">UMÓW SERWIS</button>
-    </nav>
-
-    <header class="hero">
-        <h1>Serwis Rowerowy Kraków - Al. Pokoju 32A</h1>
-        <p>Fachowa naprawa rowerów, przeglądy i wypożyczalnia. Przygotuj swój rower na sezon z rzemieślnikami z Krakowa.</p>
-        <button class="btn" onclick="toggleModal()">ZAREZERWUJ TERMIN ONLINE</button>
-    </header>
-
-    <section class="services">
-        <div class="card">
-            <h3>🔧 Serwis Rowerowy</h3>
-            <p>Pełna diagnostyka i naprawa Twojego roweru w centrum Krakowa.</p>
-        </div>
-        <div class="card">
-            <h3>🚲 Wypożyczalnia</h3>
-            <p>Solidne rowery miejskie gotowe do trasy. Wynajmij i jedź!</p>
-        </div>
-        <div class="card">
-            <h3>✨ Renowacja</h3>
-            <p>Drugie życie dla Twojego klasyka. Profesjonalne odnawianie rowerów retro.</p>
-        </div>
-    </section>
-
-    <div class="modal" id="bookingModal">
-        <div class="modal-content">
-            <span class="close" onclick="toggleModal()">&times;</span>
-            <h2 style="font-family: Montserrat;">Umów wizytę w serwisie</h2>
-            <form id="contact-form" action="https://formspree.io/f/mojnjdld" method="POST">
-                <input type="text" name="name" placeholder="Twoje Imię i Nazwisko" required>
-                <input type="tel" name="phone" placeholder="Twój Numer Telefonu" required>
-                <select name="service">
-                    <option value="Przegląd">Przegląd Rowerowy</option>
-                    <option value="Naprawa">Naprawa usterki</option>
-                    <option value="Wypożyczenie">Wypożyczenie roweru</option>
-                </select>
-                <input type="text" name="date" placeholder="Wybierz datę rezerwacji" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" required>
-                
-                <textarea name="description" placeholder="Opis usterki / Szczegóły zgłoszenia (np. skrzypienie w suporcie, centrowanie koła...)"></textarea>
-                
-                <button type="submit" id="submit-btn" class="btn">WYŚLIJ ZGŁOSZENIE</button>
-                <p id="form-status"></p>
-            </form>
-        </div>
+<footer>
+    <h3 style="margin-bottom: 15px; font-family: Montserrat;">Przystanek Rowerowy Kraków</h3>
+    <p>Aleja Pokoju 32A, 31-564 Kraków</p>
+    <div style="margin-top: 20px; font-size: 0.95rem;">
+        <p>Poniedziałek - Środa: 09:00 - 17:00</p>
+        <p>Czwartek - Piątek: 09:00 - 18:00</p>
+        <p>Sobota: 09:00 - 15:00</p>
+        <p style="opacity: 0.6; margin-top: 5px;">Niedziela: Zamknięte</p>
     </div>
-
-    <footer>
-        <h3 style="margin-bottom: 15px; font-family: Montserrat;">Przystanek Rowerowy Kraków</h3>
-        <p>Aleja Pokoju 32A, 31-564 Kraków</p>
-        <div style="margin-top: 20px; font-size: 0.95rem;">
-            <p>Poniedziałek - Środa: 09:00 - 17:00</p>
-            <p>Czwartek - Piątek: 09:00 - 18:00</p>
-            <p>Sobota: 09:00 - 15:00</p>
-            <p style="opacity: 0.6; margin-top: 5px;">Niedziela: Zamknięte</p>
-        </div>
-    </footer>
-
-    <script>
-        function toggleModal() {
-            const modal = document.getElementById('bookingModal');
-            modal.style.display = (window.getComputedStyle(modal).display === 'none') ? 'flex' : 'none';
-            document.body.style.overflow = (modal.style.display === 'flex') ? 'hidden' : 'auto';
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('bookingModal');
-            if (event.target == modal) toggleModal();
-        }
-
-        const form = document.getElementById("contact-form");
-        async function handleSubmit(event) {
-            event.preventDefault();
-            const status = document.getElementById("form-status");
-            const button = document.getElementById("submit-btn");
-            const data = new FormData(event.target);
-            button.disabled = true;
-            status.innerHTML = "Wysyłanie...";
-            fetch(event.target.action, {
-                method: form.method,
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) { window.location.href = "danke.html"; } 
-                else { status.innerHTML = "Ups! Wystąpił błąd."; }
-            }).catch(error => { status.innerHTML = "Błąd połączenia."; })
-            .finally(() => { button.disabled = false; });
-        }
-        form.addEventListener("submit", handleSubmit);
-    </script>
-</body>
-</html>
+    <div style="margin-top: 20px;">
+        <a href="#" style="color: white; margin: 0 10px; text-decoration: none;">Facebook</a>
+        <a href="#" style="color: white; margin: 0 10px; text-decoration: none;">Instagram</a>
+    </div>
+</footer>
