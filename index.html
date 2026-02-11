@@ -40,15 +40,21 @@
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "11:00",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday"],
+          "opens": "09:00",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Thursday", "Friday"],
+          "opens": "09:00",
           "closes": "18:00"
         },
         {
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": "Saturday",
-          "opens": "10:00",
-          "closes": "14:00"
+          "opens": "09:00",
+          "closes": "15:00"
         }
       ]
     }
@@ -143,7 +149,8 @@
                     <option value="Naprawa">Naprawa usterki</option>
                     <option value="Wypożyczenie">Wypożyczenie roweru</option>
                 </select>
-                <input type="date" name="date" required placeholder="Preferowana data">
+                <input type="text" name="date" placeholder="Wybierz datę rezerwacji" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" required>
+                
                 <textarea name="description" placeholder="Opis usterki / Szczegóły zgłoszenia (np. skrzypienie w suporcie, centrowanie koła...)"></textarea>
                 
                 <button type="submit" id="submit-btn" class="btn">WYŚLIJ ZGŁOSZENIE</button>
@@ -153,10 +160,14 @@
     </div>
 
     <footer>
-        <h3 style="margin-bottom: 10px; font-family: Montserrat;">Przystanek Rowerowy Kraków</h3>
+        <h3 style="margin-bottom: 15px; font-family: Montserrat;">Przystanek Rowerowy Kraków</h3>
         <p>Aleja Pokoju 32A, 31-564 Kraków</p>
-        <p style="margin-top: 10px;">Poniedziałek - Piątek: 11:00 - 18:00 | Sobota: 10:00 - 14:00</p>
-        <p style="opacity: 0.6; font-size: 0.8rem; margin-top: 5px;">Niedziela: Zamknięte</p>
+        <div style="margin-top: 20px; font-size: 0.95rem;">
+            <p>Poniedziałek - Środa: 09:00 - 17:00</p>
+            <p>Czwartek - Piątek: 09:00 - 18:00</p>
+            <p>Sobota: 09:00 - 15:00</p>
+            <p style="opacity: 0.6; margin-top: 5px;">Niedziela: Zamknięte</p>
+        </div>
     </footer>
 
     <script>
@@ -193,4 +204,3 @@
     </script>
 </body>
 </html>
-
