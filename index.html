@@ -41,7 +41,7 @@
         {
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "10:00",
+          "opens": "11:00",
           "closes": "18:00"
         },
         {
@@ -91,11 +91,12 @@
         .card h3 { color: var(--primary); margin-bottom: 15px; font-family: 'Montserrat'; }
 
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); }
-        .modal-content { background: var(--white); padding: 40px; border-radius: 20px; width: 90%; max-width: 500px; position: relative; }
+        .modal-content { background: var(--white); padding: 40px; border-radius: 20px; width: 90%; max-width: 500px; position: relative; max-height: 90vh; overflow-y: auto; }
         .close { position: absolute; top: 20px; right: 20px; font-size: 28px; cursor: pointer; }
 
         form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        input, select, textarea { padding: 12px; border: 1px solid #ddd; border-radius: 8px; width: 100%; }
+        input, select, textarea { padding: 12px; border: 1px solid #ddd; border-radius: 8px; width: 100%; font-family: 'Inter'; }
+        textarea { resize: vertical; min-height: 80px; }
         #form-status { text-align: center; margin-top: 10px; font-weight: 600; }
 
         footer { padding: 50px 10%; background: var(--dark); color: white; text-align: center; }
@@ -143,6 +144,8 @@
                     <option value="Wypożyczenie">Wypożyczenie roweru</option>
                 </select>
                 <input type="date" name="date" required>
+                <textarea name="description" placeholder="Opis usterki / Szczegóły zgłoszenia (np. skrzypienie w suporcie, centrowanie koła...)"></textarea>
+                
                 <button type="submit" id="submit-btn" class="btn">WYŚLIJ ZGŁOSZENIE</button>
                 <p id="form-status"></p>
             </form>
@@ -152,7 +155,8 @@
     <footer>
         <h3 style="margin-bottom: 10px; font-family: Montserrat;">Przystanek Rowerowy Kraków</h3>
         <p>Aleja Pokoju 32A, 31-564 Kraków</p>
-        <p style="margin-top: 10px;">Pon - Pt: 10:00 - 18:00 | Sob: 10:00 - 14:00</p>
+        <p style="margin-top: 10px;">Poniedziałek - Piątek: 11:00 - 18:00 | Sobota: 10:00 - 14:00</p>
+        <p style="opacity: 0.6; font-size: 0.8rem; margin-top: 5px;">Niedziela: Zamknięte</p>
     </footer>
 
     <script>
