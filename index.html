@@ -122,7 +122,7 @@
     <header class="hero">
         <h1>Serwis Rowerowy Kraków - Al. Pokoju 32A</h1>
         <p>Fachowa naprawa rowerów, przeglądy i wypożyczalnia. Przygotuj swój rower na sezon z rzemieślnikami z Krakowa.</p>
-        <button class="btn" onclick="toggleModal()">ZAREZERWUJ TERMIN ONLINE</button>
+        <button class="btn" onclick="toggleModal()">UMÓW SIĘ NA WIZYTĘ</button>
     </header>
 
     <section class="services">
@@ -143,24 +143,29 @@
     <div class="modal" id="bookingModal">
         <div class="modal-content">
             <span class="close" onclick="toggleModal()">&times;</span>
-            <h2 style="font-family: Montserrat;">Umów wizytę w serwisie</h2>
+            <h2 style="font-family: Montserrat;">Zgłoszenie do serwisu</h2>
+            <p style="color: #666; font-size: 0.9rem;">Zostaw dane, oddzwonimy i ustalimy termin.</p>
+            
             <form id="contact-form" action="https://formspree.io/f/mojnjdld" method="POST">
                 <input type="text" name="name" placeholder="Twoje Imię i Nazwisko" required>
                 <input type="tel" name="phone" placeholder="Twój Numer Telefonu" required>
+                
                 <select name="service">
                     <option value="Przegląd">Przegląd Rowerowy</option>
-                    <option value="Naprawa">Naprawa usterki</option>
+                    <option value="Naprawa">Naprawa konkretnej usterki</option>
                     <option value="Wypożyczenie">Wypożyczenie roweru</option>
                 </select>
-                <input type="text" name="date" placeholder="Wybierz datę rezerwacji" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" required>
+
+                <input type="text" name="timeframe" placeholder="Kiedy chcesz nas odwiedzić? (np. jutro rano, ten tydzień)" required>
+                
                 <textarea name="description" placeholder="Opis usterki / Szczegóły zgłoszenia (np. centrowanie koła, coś stuka...)"></textarea>
                 
                 <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.75rem; color: #666; cursor: pointer; text-align: left;">
                     <input type="checkbox" required style="width: 15px; height: 15px; margin-top: 2px;">
-                    <span>Wyrażam zgodę na przetwarzanie danych w celu obsługi zgłoszenia serwisowego.</span>
+                    <span>Wyrażam zgodę na przetwarzanie moich danych w celu obsługi tego zgłoszenia.</span>
                 </label>
 
-                <button type="submit" id="submit-btn" class="btn">WYŚLIJ ZGŁOSZENIE</button>
+                <button type="submit" id="submit-btn" class="btn">WYŚLIJ ZAPYTANIE</button>
                 <p id="form-status"></p>
             </form>
         </div>
