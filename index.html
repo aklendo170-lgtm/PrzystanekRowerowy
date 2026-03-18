@@ -19,15 +19,36 @@
         
         body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.6; }
 
-        nav { padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; background: var(--white); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); flex-wrap: wrap; gap: 10px;}
-        .logo { font-family: 'Montserrat'; font-weight: 900; font-size: 1.2rem; text-decoration: none; color: var(--dark); }
+        nav { padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; background: var(--white); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); flex-wrap: wrap; gap: 15px;}
+        .logo { font-family: 'Montserrat'; font-weight: 900; font-size: 1.3rem; text-decoration: none; color: var(--dark); letter-spacing: -0.5px; }
         .logo span { color: var(--primary); }
 
-        /* DODANO: Stylizacja menu nawigacyjnego */
-        .nav-links { display: flex; gap: 20px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.95rem; transition: color 0.3s; }
+        /* Lepsze odstępy i super efekt podkreślenia po najechaniu myszką */
+        .nav-links { display: flex; gap: 35px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.95rem; position: relative; padding-bottom: 5px; transition: color 0.3s; }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: var(--primary); transition: width 0.3s ease; }
         .nav-links a:hover { color: var(--primary); }
-        @media (max-width: 768px) { .nav-links { display: none; } } /* Ukrywa linki na telefonach dla czystości */
+        .nav-links a:hover::after { width: 100%; }
+
+        /* Grupowanie przycisków po prawej stronie */
+        .nav-actions { display: flex; gap: 15px; align-items: center; }
+
+        .btn { background: var(--primary); color: white; padding: 16px 35px; text-decoration: none; font-weight: 600; border-radius: 8px; transition: all 0.3s; cursor: pointer; border: none; display: inline-block; font-family: 'Inter'; }
+        .btn:hover { background: #e67e00; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3); }
+
+        /* NOWY PRZYCISK TELEFONU (Z ramką, bez tła) */
+        .btn-outline { background: transparent; color: var(--dark); border: 2px solid var(--primary); padding: 12px 20px; font-size: 0.9rem; border-radius: 8px; display: flex; align-items: center; transition: all 0.3s; font-weight: 700; }
+        .btn-outline:hover { background: var(--primary); color: white; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 140, 0, 0.2); }
+
+        /* Mniejszy padding dla głównego przycisku w samym menu, żeby pasował rozmiarem do telefonu */
+        .nav-actions .btn { padding: 14px 20px; font-size: 0.9rem; }
+
+        /* Dostosowanie do telefonów komórkowych */
+        @media (max-width: 960px) { 
+            .nav-links { display: none; } 
+            .nav-actions { width: 100%; justify-content: space-between; margin-top: 10px; }
+            .logo { width: 100%; text-align: center; }
+        }
 
         .hero {
             height: 75vh;
@@ -77,7 +98,7 @@
 
 <body>
 
-    <nav>
+   <nav>
         <a href="#" class="logo">PRZYSTANEK <span>ROWEROWY</span></a>
         
         <div class="nav-links">
@@ -87,7 +108,10 @@
             <a href="#kontakt">Kontakt</a>
         </div>
 
-        <button class="btn" onclick="toggleModal()" style="padding: 10px 20px; font-size: 0.85rem;">UMÓW SERWIS</button>
+        <div class="nav-actions">
+            <a href="tel:+48537090106" class="btn btn-outline">📞 537 090 106</a>
+            <button class="btn" onclick="toggleModal()">UMÓW SERWIS</button>
+        </div>
     </nav>
 
     <header class="hero">
