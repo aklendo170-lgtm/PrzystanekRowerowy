@@ -33,10 +33,24 @@
         .btn { background: var(--primary); color: white; padding: 16px 35px; text-decoration: none; font-weight: 600; border-radius: 8px; transition: all 0.3s; cursor: pointer; border: none; display: inline-block; font-family: 'Inter'; }
         .btn:hover { background: #e67e00; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3); }
 
-        .btn-outline { background: transparent; color: var(--dark); border: 2px solid var(--primary); padding: 12px 20px; font-size: 0.9rem; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; transition: all 0.3s; font-weight: 700; }
-        .btn-outline:hover { background: var(--primary); color: white; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 140, 0, 0.2); }
-
-        .nav-actions .btn { padding: 14px 20px; font-size: 0.9rem; display: inline-flex; align-items: center; justify-content: center; }
+        /* SZTYWNE WYMIARY DLA PRZYCISKÓW W MENU (IDEALNIE RÓWNE) */
+        .nav-actions .btn, .nav-actions .btn-outline { 
+            height: 46px; 
+            padding: 0 20px; 
+            font-size: 0.9rem; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            box-sizing: border-box;
+            border: none;
+            margin: 0;
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .nav-actions .btn-outline:hover { background: #e67e00; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3); }
 
         @media (max-width: 960px) { 
             .nav-links { display: none; } 
@@ -54,8 +68,6 @@
 
         .hero h1 { font-family: 'Montserrat'; font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
         .hero p { font-size: 1.1rem; margin-bottom: 30px; max-width: 650px; opacity: 0.95; }
-        .btn { background: var(--primary); color: white; padding: 16px 35px; text-decoration: none; font-weight: 600; border-radius: 8px; transition: 0.3s; cursor: pointer; border: none; display: inline-block; font-family: 'Inter'; }
-        .btn:hover { background: #e67e00; transform: translateY(-3px); }
 
         .section-title { text-align: center; font-family: 'Montserrat'; font-size: 2.2rem; margin-bottom: 40px; color: var(--dark); }
         .section-padding { padding: 80px 10%; }
