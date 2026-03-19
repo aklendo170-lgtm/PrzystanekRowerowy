@@ -18,9 +18,12 @@
         
         body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.6; }
 
-        nav { padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; background: var(--white); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); flex-wrap: wrap; gap: 15px;}
-        .logo { font-family: 'Montserrat'; font-weight: 900; font-size: 1.3rem; text-decoration: none; color: var(--dark); letter-spacing: -0.5px; }
+        nav { padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; background: var(--white); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); flex-wrap: wrap; gap: 15px; transition: all 0.3s ease;}
+        .logo { font-family: 'Montserrat'; font-weight: 900; font-size: 1.3rem; text-decoration: none; color: var(--dark); letter-spacing: -0.5px; z-index: 101; }
         .logo span { color: var(--primary); }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 5px; }
+        .hamburger span { width: 25px; height: 3px; background-color: var(--dark); border-radius: 3px; transition: all 0.3s ease-in-out; }
 
         .nav-links { display: flex; gap: 35px; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.95rem; position: relative; padding-bottom: 5px; transition: color 0.3s; }
@@ -33,7 +36,6 @@
         .btn { background: var(--primary); color: white; padding: 16px 35px; text-decoration: none; font-weight: 600; border-radius: 8px; transition: all 0.3s; cursor: pointer; border: none; display: inline-block; font-family: 'Inter'; }
         .btn:hover { background: #e67e00; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3); }
 
-        /* SZTYWNE WYMIARY DLA PRZYCISKÓW W MENU (IDEALNIE RÓWNE) */
         .nav-actions .btn, .nav-actions .btn-outline { 
             height: 46px; 
             padding: 0 20px; 
@@ -50,12 +52,21 @@
             border-radius: 8px;
             transition: all 0.3s;
         }
-        .nav-actions .btn-outline:hover { background: #e67e00; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3); }
+        
+        .nav-actions .btn-outline { background: transparent; color: var(--dark); border: 2px solid var(--primary); }
+        .nav-actions .btn-outline:hover { background: var(--primary); color: white; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 140, 0, 0.2); }
 
         @media (max-width: 960px) { 
-            .nav-links { display: none; } 
-            .nav-actions { width: 100%; justify-content: space-between; margin-top: 10px; }
-            .logo { width: 100%; text-align: center; }
+            .hamburger { display: flex; }
+            .nav-links, .nav-actions { display: none; width: 100%; flex-direction: column; text-align: center; }
+            
+            nav.menu-open .nav-links { display: flex; padding: 20px 0 10px 0; gap: 20px; }
+            nav.menu-open .nav-actions { display: flex; padding-bottom: 10px; gap: 10px; }
+            nav.menu-open .nav-actions .btn, nav.menu-open .nav-actions .btn-outline { width: 100%; height: 50px; }
+            
+            nav.menu-open .hamburger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            nav.menu-open .hamburger span:nth-child(2) { opacity: 0; }
+            nav.menu-open .hamburger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
         }
 
         .hero {
@@ -100,9 +111,15 @@
 
 <body>
 
-   <nav>
+   <nav id="navbar">
         <a href="#" class="logo">PRZYSTANEK <span>ROWEROWY</span></a>
         
+        <div class="hamburger" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
         <div class="nav-links">
             <a href="#o-nas">O nas</a>
             <a href="#uslugi">Usługi</a>
@@ -111,7 +128,7 @@
         </div>
 
         <div class="nav-actions">
-            <a href="tel:+48537090106" class="btn btn-outline">📞 537 090 106</a>
+            <a href="tel:+48537090106" class="btn-outline">📞 537 090 106</a>
             <button class="btn" onclick="toggleModal()">UMÓW SERWIS</button>
         </div>
     </nav>
@@ -213,10 +230,21 @@
     </footer>
 
     <script>
+        function toggleMobileMenu() {
+            document.getElementById('navbar').classList.toggle('menu-open');
+        }
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navbar').classList.remove('menu-open');
+            });
+        });
+
         function toggleModal() {
             const modal = document.getElementById('bookingModal');
             modal.style.display = (window.getComputedStyle(modal).display === 'none') ? 'flex' : 'none';
             document.body.style.overflow = (modal.style.display === 'flex') ? 'hidden' : 'auto';
+            document.getElementById('navbar').classList.remove('menu-open');
         }
 
         window.onclick = function(event) {
