@@ -19,10 +19,13 @@
         body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.6; }
 
         nav { padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; background: var(--white); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); flex-wrap: wrap; gap: 15px; transition: all 0.3s ease;}
-        .logo { font-family: 'Montserrat'; font-weight: 900; font-size: 1.3rem; text-decoration: none; color: var(--dark); letter-spacing: -0.5px; z-index: 101; }
+        
+        /* Zmiana: Płynne skalowanie tekstu logo i blokada łamania wiersza na małych ekranach */
+        .logo { font-family: 'Montserrat'; font-weight: 900; font-size: clamp(1rem, 4.5vw, 1.3rem); text-decoration: none; color: var(--dark); letter-spacing: -0.5px; z-index: 101; white-space: nowrap; }
         .logo span { color: var(--primary); }
 
-        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 5px; }
+        /* Zmiana: flex-shrink: 0 gwarantuje, że ikonka menu nie zostanie zgnieciona */
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 5px; flex-shrink: 0; }
         .hamburger span { width: 25px; height: 3px; background-color: var(--dark); border-radius: 3px; transition: all 0.3s ease-in-out; }
 
         .nav-links { display: flex; gap: 35px; align-items: center; }
